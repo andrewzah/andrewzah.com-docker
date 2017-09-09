@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  http:
+    build: .
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/sites/
+        target: /var/www/sites/
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/caddy/caddypath/
+        target: /var/caddy/
+      - type: bind
+        source: ${COMPOSE_ROOT}/services/http/Caddyfile
+        target: /etc/Caddyfile
+    environment:
+      CADDYPATH: "/var/caddy"
+    env_file: ${COMPOSE_ROOT}/services/http/secret.env
+    ports:
+      - "443:443"
+      - "80:80"
+    restart: always

@@ -1,0 +1,9 @@
+znc.andrewzah.com {
+  tls zah@andrewzah.com
+
+  log / stdout {combined}
+  errors stderr
+
+  proxy / http://znc:6697
+}
+
