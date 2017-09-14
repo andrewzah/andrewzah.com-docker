@@ -1,0 +1,4 @@
+proxy :6667 bitlbee:6667 {
+  host znc.andrewzah.com
+  tls zah@andrewzah.com
+}
