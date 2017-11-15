@@ -7,3 +7,11 @@ znc.andrewzah.com {
   proxy / http://znc:6697
 }
 
+andrewzah.com {
+  tls zah@andrewzah.com
+
+  log / stdout {combined}
+  errors stderr
+
+  proxy / http://web:3000
+}
