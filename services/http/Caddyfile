@@ -13,5 +13,5 @@ andrewzah.com {
   log / stdout {combined}
   errors stderr
 
-  proxy / http://web:3000
+  proxy / http://web:1313
 }
