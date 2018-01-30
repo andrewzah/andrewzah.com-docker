@@ -1,3 +1,5 @@
-proxy :1313 ms:1313 {
-  tls zah@andrewzah.com
+:8080 {
+  tls zah@andrewzah.com {
+    dns gandi
+  }
 }

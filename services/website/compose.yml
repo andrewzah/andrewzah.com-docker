@@ -1,21 +1,6 @@
 version: '3.3'
 
 services:
-  web_proxy:
-    build:
-      context: ${COMPOSE_ROOT}/services/website/
-      dockerfile: Dockerfile-caddy-net
-    volumes:
-      - type: bind
-        source: ${COMPOSE_ROOT}/services/website/Caddyfile
-        target: /etc/Caddyfile
-    environment:
-      CADDYPATH: "/var/caddy"
-    ports:
-      - "$GUTENBERG_PORT:$GUTENBERG_PORT"
   web:
     image: andrewzah/rust_ms
     restart: always
-    command: ./gutenberg serve -p $GUTENBERG_PORT -i $GUTENBERG_INTERFACE -u $PROD_GUTENBERG_BASE_URL
-    env_file:
-      - ${COMPOSE_ROOT}/services/website/.env
