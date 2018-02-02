@@ -1,4 +1,6 @@
 proxy :6697 znc:6697 {
   host znc.andrewzah.com
-  tls zah@andrewzah.com
+  tls zah@andrewzah.com {
+    dns gandi
+  }
 }

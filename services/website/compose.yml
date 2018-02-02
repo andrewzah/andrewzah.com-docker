@@ -2,5 +2,12 @@ version: '3.3'
 
 services:
   web:
-    image: andrewzah/rust_ms
+    image: andrewzah/personal_site
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/services/website/andrewzah_com-keybase.txt
+        target: /www/public/keybase.txt
+      - type: bind
+        source: ${COMPOSE_ROOT}/services/website/andrei_blue-keybase.txt
+        target: /www/public/.well-known/keybase.txt
     restart: always

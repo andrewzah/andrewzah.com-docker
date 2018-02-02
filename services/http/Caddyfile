@@ -1,3 +1,12 @@
+andrewzah.com {
+  tls zah@andrewzah.com
+
+  log / stdout {combined}
+  errors stderr
+
+  proxy / http://web:1111
+}
+
 znc.andrewzah.com {
   tls zah@andrewzah.com
 
@@ -5,13 +14,4 @@ znc.andrewzah.com {
   errors stderr
 
   proxy / http://znc:6697
-}
-
-andrewzah.com {
-  tls zah@andrewzah.com
-
-  log / stdout {combined}
-  errors stderr
-
-  proxy / http://web:1313
 }
