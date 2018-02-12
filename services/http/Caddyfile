@@ -1,4 +1,4 @@
-andrewzah.com {
+www.andrewzah.com, andrewzah.com, andrei.blue {
   tls zah@andrewzah.com
 
   log / stdout {combined}
@@ -14,4 +14,13 @@ znc.andrewzah.com {
   errors stderr
 
   proxy / http://znc:6697
+}
+
+feeds.andrewzah.com {
+  tls zah@andrewzah.com
+
+  log / stdout {combined}
+  errors stderr
+
+  proxy / http://miniflux:8080
 }
