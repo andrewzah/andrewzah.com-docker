@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  crystalbot:
+    image: andrewzah/crystalbot
+    env_file: ${COMPOSE_ROOT}/services/crystalbot/secret.env
+    environment:
+      - DOTA_API_KEY
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/srv/crystalbot/data
+      - ./conf:/srv/crystalbot/data
