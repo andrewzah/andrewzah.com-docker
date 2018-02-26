@@ -9,5 +9,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./data:/srv/crystalbot/data
-      - ./conf:/srv/crystalbot/data
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/crystalbot/data
+        target: /srv/crystalbot/data
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/crystalbot/conf
+        target: /srv/crystalbot/conf
