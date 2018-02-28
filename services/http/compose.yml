@@ -3,8 +3,10 @@ version: "3.3"
 services:
   http:
     build:
-      context: ${COMPOSE_ROOT}/services/http
-      dockerfile: Dockerfile
+      context: github.com/abiosoft/caddy-docker.git
+      args:
+        plugins: git
+        version: 0.10.11
     volumes:
       - type: bind
         source: ${COMPOSE_ROOT}/data/sites/
