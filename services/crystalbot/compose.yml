@@ -4,10 +4,8 @@ services:
   crystalbot:
     image: andrewzah/crystalbot
     env_file: ${COMPOSE_ROOT}/services/crystalbot/secret.env
-    environment:
-      - DOTA_API_KEY
     ports:
-      - "3000:3000"
+      - "195.201.22.141:3000:3000"
     volumes:
       - type: bind
         source: ${COMPOSE_ROOT}/data/crystalbot/data
