@@ -16,6 +16,15 @@ znc.andrewzah.com {
   proxy / http://znc:6697
 }
 
+comments.andrewzah.com {
+  tls zah@andrewzah.com
+
+  log / stdout {combined}
+  errors stderr
+
+  proxy / http://isso:8090
+}
+
 bot.andrewzah.com, bot.andrei.blue {
   tls zah@andrewzah.com
 

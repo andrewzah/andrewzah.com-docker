@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+  mail_forwarder:
+    image: zixia/simple-mail-forwarder
+    ports:
+      - "25:25"
+    environment:
+      - SMF_CONFIG=@andrewzah.com:zah@andrewzah.com
+    restart: always

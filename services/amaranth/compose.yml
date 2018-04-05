@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  amaranth:
+    image: andrewzah/amaranth
+    env_file: ${COMPOSE_ROOT}/services/amaranth/secret.env
+    ports:
+      - "195.201.22.141:3000:7777"
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/amaranth/data
+        target: /srv/amaranth/data
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/amaranth/conf
+        target: /srv/amaranth/conf

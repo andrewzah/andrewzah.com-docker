@@ -5,12 +5,21 @@
 FROM alpine:edge
 
 RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk --update add ca-certificates bitlbee-dev bitlbee@testing bitlbee-facebook@testing bitlbee-otr@testing && \
+    apk --update --no-cache add ca-certificates bitlbee-dev bitlbee@testing bitlbee-facebook@testing bitlbee-otr@testing && \
     adduser -h /var/lib/bitlbee -s /sbin/nologin -DH bitlbee && \
     chown -R bitlbee:bitlbee /var/lib/bitlbee && \
     touch /var/run/bitlbee.pid && \
     chown bitlbee:bitlbee /var/run/bitlbee.pid && \
     rm -rf /var/cache/apk/*
+
+RUN apk add --update --no-cache --virtual .build-bitlbeeDS automake autoconf libtool gcc binutils build-base abuild binutils-doc gcc-doc make && \
+    apk --no-cache add curl git && \
+    git clone https://github.com/sm00th/bitlbee-discord.git && \
+    cd bitlbee-discord && \
+    ./autogen.sh && \
+    ./configure && \
+    make && \
+    make install
 
 USER bitlbee
 VOLUME ["/var/lib/bitlbee"]

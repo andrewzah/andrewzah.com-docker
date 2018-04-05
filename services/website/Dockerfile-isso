@@ -1,0 +1,18 @@
+FROM python:3.6.4-alpine3.7
+
+RUN addgroup -S isso && adduser -S -G isso isso \
+  && echo isso:${ISSO_PASSWORD} | chpasswd
+
+RUN apk add --no-cache --virtual .build-utils gcc musl-dev \
+    && pip3 install gunicorn gevent isso \
+    && apk del .build-utils
+
+RUN mkdir /data \
+  && touch /data/comments.db \
+  && chown -R isso:isso /data
+
+COPY isso.conf /etc/isso.conf
+
+#USER isso
+CMD export ISSO_SETTINGS=/etc/isso.conf \
+  && gunicorn -k gevent -b 0.0.0.0:8090 -w 4 --preload isso.run
