@@ -92,3 +92,12 @@ mtg.andrei.blue {
 
   proxy / http://mtg:4747
 }
+
+data.andrei.blue {
+  tls zah@andrewzah.com
+
+  log / stdout {combined}
+  errors stderr
+
+  proxy / http://netdata:19999
+}
