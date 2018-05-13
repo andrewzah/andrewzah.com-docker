@@ -47,16 +47,6 @@ bot.andrewzah.com, bot.andrei.blue {
   }
 }
 
-git.andrewzah.com {
-  tls zah@andrewzah.com
-
-  log / stdout {combined}
-  errors stderr
-
-  proxy / http://git:3000
-}
-
-
 feeds.andrewzah.com {
   tls zah@andrewzah.com
 
