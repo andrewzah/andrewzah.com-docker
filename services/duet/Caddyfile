@@ -1,0 +1,15 @@
+:3003 {
+  root /srv/duet
+  gzip
+
+  fastcgi / 127.0.0.1:9000 php
+  index index.php
+
+  rewrite {
+    regexp .*
+    ext /
+    to /index.php?{query}
+  }
+
+  on startup php-fpm --nodaemonize
+}
