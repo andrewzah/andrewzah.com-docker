@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  git:
+    image: gitea/gitea:latest
+    ports:
+      - "3000"
+      - "22:22"
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/git
+        target: /data
+    depends_on:
+      - git_db
+    restart: always
+  git_db:
+    image: postgres:9.6.7-alpine
+    env_file:
+      - "${COMPOSE_ROOT}/services/git/secret.env"
+    restart: always
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/git/postgres
+        target: /var/lib/postgresql/data

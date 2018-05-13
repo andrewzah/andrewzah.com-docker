@@ -1,0 +1,30 @@
+version: "3.3"
+
+services:
+  duet:
+    build:
+      context: ${COMPOSE_ROOT}/services/duet/
+    image: andrewzah/duet
+    env_file:
+      - "secret.env"
+    ports:
+      - "3003"
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/services/duet/Caddyfile
+        target: /etc/Caddyfile
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/duet/
+        target: /srv/duet/
+
+  duet_db:
+    image: mysql:5.5
+    env_file:
+      - "${COMPOSE_ROOT}/services/duet/secret.env"
+    ports:
+      - "3306"
+    volumes:
+      - duet_db:/var/lib/mysql/
+
+volumes:
+  duet_db:
