@@ -5,8 +5,8 @@ services:
     build:
       context: github.com/abiosoft/caddy-docker.git
       args:
-        plugins: git
-        version: 0.10.11
+        plugins: git geoip
+        version: 0.10.14
     volumes:
       - type: bind
         source: ${COMPOSE_ROOT}/data/sites/
@@ -17,8 +17,12 @@ services:
       - type: bind
         source: ${COMPOSE_ROOT}/services/http/Caddyfile
         target: /etc/Caddyfile
+      - type: bind
+        source: /usr/share/GeoLite2-City.mmdb
+        target: /usr/share/GeoLite2-City.mmdb
     environment:
       CADDYPATH: "/var/caddy"
+      ACME_AGREE: "true"
     env_file: ${COMPOSE_ROOT}/services/http/secret.env
     ports:
       - "195.201.22.141:443:443"
