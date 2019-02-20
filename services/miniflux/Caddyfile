@@ -1,6 +1,0 @@
-proxy :8888 miniflux:8080 {
-  host: feeds.andrewzah.com
-  tls zah@andrewzah.com {
-    gandiv5
-  }
-}

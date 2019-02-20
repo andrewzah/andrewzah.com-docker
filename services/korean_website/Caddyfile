@@ -1,5 +1,4 @@
-proxy :6697 znc:6697 {
-  host znc.andrewzah.com
+:1111 {
   tls zah@andrewzah.com {
     dns gandiv5
   }

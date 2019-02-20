@@ -1,0 +1,6 @@
+version: '3.3'
+
+services:
+  korean_webapp:
+    image: andrewzah/korean_website
+    restart: always
