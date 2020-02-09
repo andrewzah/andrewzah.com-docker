@@ -3,10 +3,7 @@ version: "3.3"
 services:
   http:
     build:
-      context: github.com/abiosoft/caddy-docker.git
-      args:
-        plugins: git geoip
-        version: 0.10.14
+      context: ${COMPOSE_ROOT}/services/http
     volumes:
       - type: bind
         source: ${COMPOSE_ROOT}/data/sites/
@@ -15,14 +12,16 @@ services:
         source: ${COMPOSE_ROOT}/data/caddy/caddypath/
         target: /var/caddy/
       - type: bind
+        source: ${COMPOSE_ROOT}/data/caddy/uploads/
+        target: /var/www/uploads
+      - type: bind
         source: ${COMPOSE_ROOT}/services/http/Caddyfile
-        target: /etc/Caddyfile
+        target: /config/Caddyfile
       - type: bind
         source: /usr/share/GeoLite2-City.mmdb
         target: /usr/share/GeoLite2-City.mmdb
     environment:
       CADDYPATH: "/var/caddy"
-      ACME_AGREE: "true"
     env_file: ${COMPOSE_ROOT}/services/http/secret.env
     ports:
       - "195.201.22.141:443:443"

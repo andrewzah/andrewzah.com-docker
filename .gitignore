@@ -1,7 +1,5 @@
+*.sql
 *.env
 data/
 setup.sh
-/services/website/isso.conf
-/services/znc/irc.conf
-/services/duet/src
-/services/mtg/servatrice.ini
+/services/matterbridge/matterbridge.toml

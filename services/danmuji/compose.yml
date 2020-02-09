@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  danmuji_db:
+    image: postgres:9.6.7-alpine
+    volumes:
+      - type: bind
+        source: ${COMPOSE_ROOT}/data/danmuji/postgres
+        target: /var/lib/postgresql/data
+    env_file:
+      - "${COMPOSE_ROOT}/services/danmuji/secret.env"
+    restart: always
+  danmuji:
+    image: andrewzah/danmuji
+    env_file:
+      - "${COMPOSE_ROOT}/services/danmuji/secret.env"
+    restart: always
+    depends_on:
+      - danmuji_db
