@@ -14,5 +14,6 @@ FROM alpine:edge
 
 COPY --from=builder /go/bin/zah-caddy /go/bin/zah-caddy
 
-CMD ["/go/bin/zah-caddy", "--conf", "/config/Caddyfile", "--log", "stdout", "--agree=true"]
+WORKDIR /var/www/uploads
 
+CMD ["/go/bin/zah-caddy", "--conf", "/config/Caddyfile", "--log", "stdout", "--agree=true"]

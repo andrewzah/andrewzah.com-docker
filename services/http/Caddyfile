@@ -1,6 +1,6 @@
-www.andrewzah.com, andrewzah.com, andrei.blue {
-  gzip
+https://www.andrewzah.com, andrewzah.com, andrei.blue {
   tls zah@andrewzah.com
+  gzip
 
   log / stdout {combined}
   errors stderr
@@ -12,22 +12,15 @@ www.andrewzah.com, andrewzah.com, andrei.blue {
   proxy / http://web:1111
 }
 
-up.andrewzah.com {
-  proxy / http://statping:8080 {
-    transparent
-    websocket
-  }
+https://korean.andrewzah.com {
+  tls zah@andrewzah.com
+  gzip
 
-}
-
-korean.andrewzah.com {
   geoip /usr/share/GeoLite2-City.mmdb
   redir 302 {
     if {geoip_country_code} is "KR"
     / https://andrei.kr/
   }
-  gzip
-  tls zah@andrewzah.com
 
   log / stdout {combined}
   errors stderr
@@ -42,17 +35,18 @@ https://irc-media.andrewzah.com {
   log / stdout {combined}
   errors stderr
 
-  basicauth /uploads illustriou 7gTdUk1WTGgldfh2FAXtw
+  root /var/www/uploads
+  basicauth /uploads {%CADDY_USER%} {%CADDY_PASS%}
 
   webdav /upload {
     scope /var/www/uploads
-    modify      true
-    allow_r .
+    modify true
+    allow /var/www/uploads
   }
 
   webdav / {
     scope /var/www/uploads
     modify false
-    allow_r .
+    allow /var/www/uploads
   }
 }
