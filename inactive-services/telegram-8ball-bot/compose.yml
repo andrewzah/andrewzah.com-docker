@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  telegram-8ball-bot:
+    image: andrewzah/telegram-8ball-bot
+    volumes:
+      - ${COMPOSE_ROOT}/services/telegram-8ball-bot/.env:/.env

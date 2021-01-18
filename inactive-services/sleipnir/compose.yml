@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  sleipnir:
+    image: andrewzah/sleipnir
+    volumes:
+      - ${COMPOSE_ROOT}/services/sleipnir/secret.env:/.env
+      - ${COMPOSE_ROOT}/services/sleipnir/sleipnir.db:/sleipnir.db

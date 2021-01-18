@@ -1,0 +1,8 @@
+scrape_configs:
+  - job_name: apu4d4
+    scheme: https
+    static_configs:
+      - targets: ['router.genessee.zah.rocks']
+  - job_name: apu2e2
+    static_configs:
+      - targets: ['98.25.244.188:9101']

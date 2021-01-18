@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  korean_gongbu_frontend:
+    image: andrewzah/korean-gongbu-frontend:latest
+    ports:
+      - "5000"

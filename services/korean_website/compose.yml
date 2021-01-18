@@ -1,6 +1,8 @@
-version: '3.3'
+version: '3.7'
 
 services:
   korean_webapp:
     image: andrewzah/korean_website
-    restart: always
+    ports:
+      - "1111"
+    restart: unless-stopped

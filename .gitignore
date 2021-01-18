@@ -2,4 +2,4 @@
 *.env
 data/
 setup.sh
-/services/matterbridge/matterbridge.toml
+matterbridge.toml

@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  influxdb:
+    image: influxdb:1.7-alpine
+    environment:
+      INFLUXDB_REPORTING_DISABLED: 'true'
+    env_file:
+      - "${COMPOSE_ROOT}/services/influxdb/secret.env"
+    volumes:
+      - "${COMPOSE_ROOT}/services/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:rw"
+      - "${COMPOSE_ROOT}/data/influxdb/data/:/var/lib/influxdb/:rw"
+    ports:
+      - "8086"
+      - "195.201.22.141:8089:8089/udp"
+    restart: unless-stopped

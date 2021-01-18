@@ -1,29 +1,16 @@
-version: "3.3"
+version: '3.7'
 
 services:
   http:
-    build:
-      context: ${COMPOSE_ROOT}/services/http
+    image: caddy:2.2.1-alpine
     volumes:
       - type: bind
-        source: ${COMPOSE_ROOT}/data/sites/
-        target: /var/www/sites/
-      - type: bind
-        source: ${COMPOSE_ROOT}/data/caddy/caddypath/
-        target: /var/caddy/
-      - type: bind
-        source: ${COMPOSE_ROOT}/data/caddy/uploads/
-        target: /var/www/uploads
-      - type: bind
         source: ${COMPOSE_ROOT}/services/http/Caddyfile
-        target: /config/Caddyfile
+        target: /etc/caddy/Caddyfile
       - type: bind
-        source: /usr/share/GeoLite2-City.mmdb
-        target: /usr/share/GeoLite2-City.mmdb
-    environment:
-      CADDYPATH: "/var/caddy"
-    env_file: ${COMPOSE_ROOT}/services/http/secret.env
+        source: ${COMPOSE_ROOT}/data/caddy/
+        target: /data
     ports:
       - "195.201.22.141:443:443"
       - "195.201.22.141:80:80"
-    restart: always
+    restart: unless-stopped

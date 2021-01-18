@@ -1,52 +1,55 @@
-https://www.andrewzah.com, andrewzah.com, andrei.blue {
-  tls zah@andrewzah.com
-  gzip
+https://andrewzah.com, andrewzah.com {
+  encode gzip
 
-  log / stdout {combined}
-  errors stderr
-
-  proxy /webhook http://web:1111/webhook {
-    transparent
+  reverse_proxy * web:2020 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
   }
-
-  proxy / http://web:1111
 }
 
-https://korean.andrewzah.com {
-  tls zah@andrewzah.com
-  gzip
-
-  geoip /usr/share/GeoLite2-City.mmdb
-  redir 302 {
-    if {geoip_country_code} is "KR"
-    / https://andrei.kr/
+https://prometheus.metrics.andrewzah.com {
+  reverse_proxy * prometheus:9090 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
   }
-
-  log / stdout {combined}
-  errors stderr
-
-  proxy / http://korean_webapp:1111
 }
 
-https://irc-media.andrewzah.com {
-  tls zah@andrewzah.com
-  gzip
-
-  log / stdout {combined}
-  errors stderr
-
-  root /var/www/uploads
-  basicauth /uploads {%CADDY_USER%} {%CADDY_PASS%}
-
-  webdav /upload {
-    scope /var/www/uploads
-    modify true
-    allow /var/www/uploads
+grafana.metrics.andrewzah.com {
+  reverse_proxy * grafana:3000 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
   }
+}
 
-  webdav / {
-    scope /var/www/uploads
-    modify false
-    allow /var/www/uploads
+https://influxdb.metrics.andrewzah.com {
+  reverse_proxy * influxdb:8089 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
+  }
+}
+
+https://alpha.korean-gongbu.com {
+  reverse_proxy * korean_gongbu_frontend:5000 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
+  }
+}
+
+https://old.korean-gongbu.com {
+  reverse_proxy * korean_webapp:1111 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
   }
 }
